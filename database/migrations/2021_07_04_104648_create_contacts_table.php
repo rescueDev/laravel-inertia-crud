@@ -19,7 +19,7 @@ class CreateContactsTable extends Migration
             $table->string('lastname', 30);
             $table->string('gender', 30);
             $table->tinyInteger('age')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->default(1);
             $table->timestamps();
         });
     }

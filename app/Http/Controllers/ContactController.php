@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class ContactController extends Controller
@@ -23,24 +24,23 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         //validate first 
-        //validate data
+
         $request->validate([
             'firstname' => 'required|min:5|max:30',
             'lastname' => 'required|min:5|max:30',
             'age' => 'required|integer',
             'gender' => 'string|max:15',
-            'user_id' => 'required|integer',
-
         ]);
 
-        Contact::create([
+        $userId = Auth::user()->id;
+
+        $contact = Contact::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'age' => $request->age,
             'gender' => $request->gender,
-            'user_id' => Auth::user()->id
+            'user_id' => $userId
         ]);
-
 
         return Redirect::route('contacts.index');
     }

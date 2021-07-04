@@ -12,7 +12,8 @@ class Contact extends Model
         'firstname',
         'lastname',
         'gender',
-        'age'
+        'age',
+        'user_id'
     ];
 
     public function user()
